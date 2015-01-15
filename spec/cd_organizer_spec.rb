@@ -37,13 +37,34 @@ describe(Organizer) do
     end
   end
 
-  describe(".search") do
+  describe(".search_id") do
     it("tests the search function to be able to search for cd") do
       test_cd = Organizer.new({:cd_name =>"Christmas songs", :artist_name => "Various Artists"})
       test_cd.save()
       test_cd_2 = Organizer.new({:cd_name => "Halloween music", :artist_name => "Various Artists"})
       test_cd_2.save()
-      expect(Organizer.search_id?(1)).to(eq([test_cd]))
+      expect(Organizer.search_id(1)).to(eq(test_cd))
     end
   end
+
+  describe(".search_album") do
+    it("tests the search function to be able to search for album titles") do
+      test_cd = Organizer.new({:cd_name =>"Christmas songs", :artist_name => "Various Artists"})
+      test_cd.save()
+      test_cd_2 = Organizer.new({:cd_name => "Halloween music", :artist_name => "Various Artists"})
+      test_cd_2.save()
+      expect(Organizer.search_album("Halloween music")).to(eq([test_cd_2]))
+    end
+  end
+
+  describe(".search_artist") do
+    it("tests the search function to be able to search for album titles") do
+      test_cd = Organizer.new({:cd_name =>"Christmas songs", :artist_name => "Various Artists"})
+      test_cd.save()
+      test_cd_2 = Organizer.new({:cd_name => "Halloween music", :artist_name => "Various Artists"})
+      test_cd_2.save()
+      expect(Organizer.search_artist("Various Artists")).to(eq([test_cd, test_cd_2]))
+    end
+  end
+
 end

@@ -11,10 +11,10 @@
   <button type="submit">Add CD</button>
 </form>
 <br>
-<p> <% if @artist_name == nil %>
+<p> <% if @all_cdes.length() == 0 %>
          Your CD collection is empty.
-      <% else %>
-        <%=@album_name%> by <%=@artist_name %> was added to the library at position <%=@id%></p>
+      <% elsif @artist_name != nil %>
+          <%=@album_name%> by <%=@artist_name %> was added to the library at position <%=@id%></p>
       <% end %>
 </p>
 <form action="/search" method="post">
@@ -26,3 +26,11 @@
   <input id="search id" name="search id" type="text">
   <button type="submit">Search</button>
 </form>
+
+<p> <% if @search_id != 0 %>
+         Your album id: <%=@search_id%> holds this information
+         The album name is <%= @result_id %>
+      <% else %>
+
+      <% end %>
+</p>
