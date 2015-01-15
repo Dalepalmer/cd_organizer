@@ -1,0 +1,28 @@
+<h1> CD Organizer </h1>
+
+<h3> Keep track of your CD collection here </h3>
+
+<form action="/collection" method="post">
+  <label for="artist name">Artist's name:</label>
+  <input id="artist name" name="artist name" type="text">
+
+  <label for="album name">Album name:</label>
+  <input id="album name" name="album name" type="text">
+  <button type="submit">Add CD</button>
+</form>
+<br>
+<p> <% if @artist_name == nil %>
+         Your CD collection is empty.
+      <% else %>
+        <%=@album_name%> by <%=@artist_name %> was added to the library at position <%=@id%></p>
+      <% end %>
+</p>
+<form action="/search" method="post">
+  <label for="search artist">Search by Artist name</label>
+  <input id="search artist" name="search artist" type="text">
+  <label for="search album">Search by Album name</label>
+  <input id="search album" name="search album" type="text">
+  <label for="search id">Search by location in library</label>
+  <input id="search id" name="search id" type="text">
+  <button type="submit">Search</button>
+</form>
