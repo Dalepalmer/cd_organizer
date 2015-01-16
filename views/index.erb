@@ -3,34 +3,37 @@
 <h3> Keep track of your CD collection here </h3>
 
 <form action="/collection" method="post">
-  <label for="artist name">Artist's name:</label>
-  <input id="artist name" name="artist name" type="text">
+  <label for="artist_name">Artist's name:</label>
+  <input id="artist_name" name="artist_name" type="text">
 
-  <label for="album name">Album name:</label>
-  <input id="album name" name="album name" type="text">
+  <label for="album_name">Album name:</label>
+  <input id="album_name" name="album_name" type="text">
   <button type="submit">Add CD</button>
 </form>
 <br>
 <p> <% if @all_cdes.length() == 0 %>
-         Your CD collection is empty.
-      <% elsif @artist_name != nil %>
-          <%=@album_name%> by <%=@artist_name %> was added to the library at position <%=@id%></p>
-      <% end %>
+  Your CD collection is empty.
+  <% elsif @artist_add != nil %>
+  <%=@album_add%> by <%=@artist_add %> was added to the library at position <%=@id%></p>
+  <% end %>
 </p>
 <form action="/search" method="post">
-  <label for="search artist">Search by Artist name</label>
-  <input id="search artist" name="search artist" type="text">
-  <label for="search album">Search by Album name</label>
-  <input id="search album" name="search album" type="text">
-  <label for="search id">Search by location in library</label>
-  <input id="search id" name="search id" type="text">
+  <label for="search_artist">Search by Artist name</label>
+  <input id="search_artist" name="search_artist" type="text">
+  <label for="search_album">Search by Album name</label>
+  <input id="search_album" name="search_album" type="text">
+  <label for="search_id">Search by location in library</label>
+  <input id="search_id" name="search_id" type="text">
   <button type="submit">Search</button>
 </form>
 
-<p> <% if @search_id != 0 %>
-         Your album id: <%=@search_id%> holds this information
-         The album name is <%= @result_id %>
-      <% else %>
+<% if @search_id != 0 && @search_id != nil %>
+  Your album id: <%=@search_id%> holds this information
+  <ul>
+    <li>The artist name is <%= @result_id.artist_name() %></li>
+    <li>The album is <%= @result_id.cd_name() %></li>
+  </ul>
+<% else %>
 
-      <% end %>
+<% end %>
 </p>

@@ -9,9 +9,9 @@ get('/') do
 end
 
 post('/collection') do
-  @artist_name = params.fetch("artist name")
-  @album_name = params.fetch("album name")
-  cd_hash = {:artist_name => @artist_name, :cd_name => @album_name}
+  @artist_add = params.fetch("artist_name")
+  @album_add = params.fetch("album_name")
+  cd_hash = {:artist_name => @artist_add, :cd_name => @album_add}
   cd = Organizer.new(cd_hash)
   cd.save()
   @id = cd.id()
@@ -20,10 +20,10 @@ post('/collection') do
 end
 
 post('/search') do
-  #@all_cdes = Organizer.all()
-  @search_artist = params.fetch("search artist")
-  @search_album = params.fetch("search album")
-  @search_id = params.fetch("search id").to_i
+  @all_cdes = Organizer.all()
+  @search_artist = params.fetch("search_artist")
+  @search_album = params.fetch("search_album")
+  @search_id = params.fetch("search_id").to_i
   @result_id = Organizer.search_id(@search_id)
   @result_artist = Organizer.search_artist(@search_artist)
   @result_album = Organizer.search_album(@search_album)
