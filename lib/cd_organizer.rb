@@ -16,6 +16,10 @@ class Organizer
     @@counter = 1
   end
 
+  define_singleton_method(:counter) do
+    @@counter
+  end
+
   define_method(:id) do
     @id
   end
