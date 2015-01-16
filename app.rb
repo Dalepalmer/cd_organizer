@@ -19,7 +19,7 @@ post('/collection') do
   erb(:index)
 end
 
-post('/search') do
+post('/library') do
   @all_cdes = Organizer.all()
   @search_artist = params.fetch("search_artist")
   @search_album = params.fetch("search_album")
@@ -27,5 +27,5 @@ post('/search') do
   @result_id = Organizer.search_id(@search_id)
   @result_artist = Organizer.search_artist(@search_artist)
   @result_album = Organizer.search_album(@search_album)
-  erb(:index)
+  erb(:library)
 end

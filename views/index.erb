@@ -17,7 +17,7 @@
   <%=@album_add%> by <%=@artist_add %> was added to the library at position <%=@id%></p>
   <% end %>
 </p>
-<form action="/search" method="post">
+<form action="/library" method="post">
   <label for="search_artist">Search by Artist name</label>
   <input id="search_artist" name="search_artist" type="text">
   <label for="search_album">Search by Album name</label>
@@ -26,37 +26,3 @@
   <input id="search_id" name="search_id" type="text">
   <button type="submit">Search</button>
 </form>
-
-<% if @search_id != 0 && @search_id != nil %>
-  <% if @search_id.<=(Organizer.counter()) %>
-    Your album id: <%=@search_id%> holds this information
-    <ul>
-      <li>The artist name is <%= @result_id.artist_name() %></li>
-      <li>The album is <%= @result_id.cd_name() %></li>
-    </ul>
-  <% else %>
-    No luck buddy!
-  <% end %>
-<% else %>
-  <% if @search_artist != "" && @search_album == "" %>
-      <p> <%= @search_artist %> albums:  </p>
-      <% @result_artist.each() do |cd_object| %>
-        <ul>
-          <li> <%= cd_object.cd_name() %> at location: <%= cd_object.id() %></li>
-        </ul>
-      <% end %>
-  <% elsif @search_artist == "" && @search_album != "" %>
-    <p>You have an album with name "<%= @search_album %>" by these artists:  </p>
-      <% @result_album.each do |cd_object| %>
-        <ul>
-          <li> <%= cd_object.artist_name() %> at location: <%= cd_object.id() %></li>
-        </ul>
-      <% end %>
-  <% elsif @search_artist == "" && @search_album == "" %>
-        <% @result_artist.each() do |cd_object| %>
-          <% if cd_object.cd_name() == @search_album %>
-            <p> You have: <%= cd_object.artist_name() %>, cd_object.cd_name() %> at location: <%= cd_object.id() %> </p>
-          <% end %>
-        <% end %>
-    <% end %>
-  <% end %>

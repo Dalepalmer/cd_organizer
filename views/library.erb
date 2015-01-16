@@ -1,0 +1,34 @@
+
+<% if @search_id != 0 && @search_id != nil %>
+  <% if @search_id.<=(Organizer.counter()) %>
+    Your album id: <%=@search_id%> holds this information
+    <ul>
+      <li>The artist name is <%= @result_id.artist_name() %></li>
+      <li>The album is <%= @result_id.cd_name() %></li>
+    </ul>
+  <% else %>
+    No luck buddy!
+  <% end %>
+<% else %>
+  <% if @search_artist != "" && @search_album == "" %>
+      <p> <%= @search_artist %> albums:  </p>
+      <% @result_artist.each() do |cd_object| %>
+        <ul>
+          <li> <%= cd_object.cd_name() %> at location: <%= cd_object.id() %></li>
+        </ul>
+      <% end %>
+  <% elsif @search_artist == "" && @search_album != "" %>
+    <p>You have an album with name "<%= @search_album %>" by these artists:  </p>
+      <% @result_album.each do |cd_object| %>
+        <ul>
+          <li> <%= cd_object.artist_name() %> at location: <%= cd_object.id() %></li>
+        </ul>
+      <% end %>
+  <% elsif @search_artist != "" && @search_album != "" %>
+        <% @result_artist.each() do |cd_object| %>
+          <% if cd_object.cd_name() == @search_album %>
+            You have: <%= cd_object.artist_name() %>, <%= cd_object.cd_name() %> at location: <%= cd_object.id() %>
+          <% end %>
+        <% end %>
+    <% end %>
+  <% end %>
